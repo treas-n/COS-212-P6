@@ -44,6 +44,8 @@ public class Main {
         System.out.println("DFS:" + g.depthFirstTraversal());
         System.out.println("BFS:" + g.breadthFirstTraversal());
         System.out.println("Strongly Connected:\n" + g.stronglyConnectedComponents());
+
+        System.out.println("\n\n------------6------------");
     }
 
 }
