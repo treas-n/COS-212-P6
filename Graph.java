@@ -149,20 +149,6 @@ public class Graph {
     }
 
     public String depthFirstTraversal() {
-        /*
-         * boolean[] visited = new boolean[numVertices];
-         * String current = vertices[0],
-         * return_ = "";
-         * 
-         * for (int i = 0; i < visited.length; i++) {
-         * visited[i] = false;
-         * }
-         * 
-         * for (String vertex : vertices) {
-         * 
-         * }
-         */
-
         if (numVertices == 0)
             return "";
 
