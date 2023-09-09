@@ -66,6 +66,8 @@ public class Graph {
         // remove from the vertex array
         shiftVerticesLeft(vertexPosition);
         numVertices--;
+        
+
     }
 
     public void removeEdge(String start, String end) {
@@ -104,6 +106,40 @@ public class Graph {
             return_ += vertices[i];
             for (int j = 0; j < numVertices; j++) {
                 return_ += "\t" + adjacencyMatrix[i][j];
+            }
+            return_ += "\n";
+        }
+
+        return_ = return_.substring(0, return_.length() - 1);
+        return return_;
+    }
+
+    public String printMatrix(Double[][] matrix) {
+        if (numVertices == 0) {
+            return "(0,0)";
+        }
+
+        String return_ = "";
+
+        /* is there a space before and after the tab or not */
+        return_ += "(" + numVertices + "," + numEdges + ")\t";
+
+        // return_ += "\n";
+
+        for (String vertex : vertices) {
+            return_ += vertex + "\t"; // + vertex;
+        }
+
+        return_ += "\n";
+
+        for (int i = 0; i < numVertices; i++) {
+            return_ += vertices[i];
+
+            for (int j = 0; j < numVertices; j++) {
+                if(matrix[i][j] == (int) Double.POSITIVE_INFINITY) return_ += "\t" + "∞";
+                
+                else return_ += "\t" + matrix[i][j];
+                
             }
             return_ += "\n";
         }
@@ -386,10 +422,10 @@ public class Graph {
         return false;
     }
 
-    // Checks whether all vertices have been added to the shortest path tree
-    // If at least one value in @array is false, that means not all vertices have
-    // been included
-
+    /* Checks whether all vertices have been added to the shortest path tree
+     * If at least one value in @param array is false, that means not all vertices have
+     * been included
+     */
     private boolean includesAllVertices(boolean array[]) {
         for (int i = 0; i < array.length; i++) {
             if (array[i] == false) {
@@ -633,8 +669,13 @@ public class Graph {
 
     private void shrinkMatrix(int index) {
         if(index > numVertices || index < 0) return;
-        for (int i = index; i < numVertices - 1; i++) {
-            adjacencyMatrix[i] = adjacencyMatrix[i + 1];
+        
+        for (int i = 0; i < numVertices - 1; i++) {
+            for(int j = index; j < numVertices - 1; j++) 
+                adjacencyMatrix[i][j] = adjacencyMatrix[i][j + 1];
+
+            if(i >= index)
+                adjacencyMatrix[i] = adjacencyMatrix[i + 1];
         }
 
         Integer[][] newMatrix = new Integer[numVertices - 1][numVertices - 1];
@@ -707,4 +748,6 @@ public class Graph {
             return stack[--stackSize];
         return -1;
     }
+
+    
 }
